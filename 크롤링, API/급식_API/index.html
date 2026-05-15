@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="자운고등학교 월간 급식 식단표">
+    <title>이달의 급식 - 자운고등학교</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <div class="school-badge">결속밴드 라이브 공연장 (자운고 식당)</div>
+            <h1>이달의 식단표 🎸</h1>
+            <p class="subtitle">결속밴드 멤버들이 추천하는 이달의 메뉴!</p>
+        </header>
+
+        <section class="month-navigator">
+            <button id="prev-month" class="nav-btn" aria-label="이전 달">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="current-month">
+                <h2 id="month-display">로딩 중...</h2>
+            </div>
+            <button id="next-month" class="nav-btn" aria-label="다음 달">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </section>
+
+        <!-- 달력 영역 -->
+        <section class="calendar-wrapper">
+            <div class="calendar-header">
+                <div class="day-label sun">일</div>
+                <div class="day-label">월</div>
+                <div class="day-label">화</div>
+                <div class="day-label">수</div>
+                <div class="day-label">목</div>
+                <div class="day-label">금</div>
+                <div class="day-label sat">토</div>
+            </div>
+            <div id="calendar-grid" class="calendar-grid">
+                <!-- 날짜 박스들이 여기에 동적으로 렌더링됩니다 -->
+            </div>
+        </section>
+        
+        <footer>
+            <button id="today-btn" class="today-btn">이번 달로 돌아가기</button>
+            <p class="info">데이터 제공: 나이스(NEIS) 교육정보 개방 포털</p>
+        </footer>
+    </main>
+
+    <!-- 상세 급식 정보를 보여줄 모달(팝업창) -->
+    <div id="meal-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modal-close" class="modal-close" aria-label="창 닫기">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            
+            <h2 id="modal-date">로딩 중...</h2>
+            
+            <div id="modal-body" class="meal-container">
+                <!-- 해당 날짜의 조식/중식/석식 데이터가 들어갑니다 -->
+            </div>
+            
+            <div class="allergy-legend">
+                <h4>⚠️ 알러지 유발 식품 안내</h4>
+                <p>1.난류, 2.우유, 3.메밀, 4.땅콩, 5.대두, 6.밀, 7.고등어, 8.게, 9.새우, 10.돼지고기, 11.복숭아, 12.토마토, 13.아황산류, 14.호두, 15.닭고기, 16.쇠고기, 17.오징어, 18.조개류, 19.잣</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

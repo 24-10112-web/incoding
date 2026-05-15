@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프리미엄 지뢰찾기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="glass-panel">
+            <header class="header">
+                <h1>지뢰찾기</h1>
+                <div class="controls">
+                    <select id="difficulty">
+                        <option value="easy">초급 (9x9, 10개)</option>
+                        <option value="medium">중급 (16x16, 40개)</option>
+                        <option value="hard">고급 (30x16, 99개)</option>
+                    </select>
+                    <button id="restart-btn" class="btn">새 게임 시작</button>
+                </div>
+                <div class="stats">
+                    <div class="stat-box">
+                        <span class="icon">🚩</span>
+                        <span id="mines-count">10</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="icon">⏱️</span>
+                        <span id="timer">000</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div id="board-container" class="board-container">
+                <div id="board" class="board"></div>
+            </div>
+            
+            <div id="game-over-modal" class="modal hidden">
+                <div class="modal-content glass-panel">
+                    <h2 id="modal-title">게임 오버!</h2>
+                    <p id="modal-message">지뢰를 밟았습니다.</p>
+                    <p>기록: <span id="final-time">0</span>초</p>
+                    <button id="modal-restart-btn" class="btn primary-btn">다시 하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2a5298);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --cell-bg-hidden: rgba(255, 255, 255, 0.15);
+    --cell-bg-hidden-hover: rgba(255, 255, 255, 0.25);
+    --cell-bg-revealed: rgba(0, 0, 0, 0.3);
+    --cell-border: rgba(255, 255, 255, 0.05);
+    --text-color: #f1f2f6;
+    --primary-color: #00d2ff;
+    --danger-color: #ff4757;
+    --success-color: #2ed573;
+    
+    /* Number colors */
+    --num-1: #3498db;
+    --num-2: #2ecc71;
+    --num-3: #e74c3c;
+    --num-4: #9b59b6;
+    --num-5: #f1c40f;
+    --num-6: #e67e22;
+    --num-7: #34495e;
+    --num-8: #95a5a6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-color);
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.game-container {
+    padding: 20px;
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: -webkit-linear-gradient(#00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+}
+
+select, .btn {
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+select option {
+    background: #203a43;
+    color: white;
+}
+
+.btn:hover, select:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.primary-btn {
+    background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+    border: none;
+    font-weight: 600;
+}
+
+.primary-btn:hover {
+    background: linear-gradient(45deg, #3a7bd5, #00d2ff);
+    box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+}
+
+.stat-box {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: monospace;
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.board-container {
+    overflow: auto;
+    max-width: calc(100vw - 100px);
+    max-height: calc(100vh - 250px);
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.board {
+    display: grid;
+    gap: 2px;
+    margin: 0 auto;
+    width: max-content;
+}
+
+.cell {
+    width: 35px;
+    height: 35px;
+    background: var(--cell-bg-hidden);
+    border: 1px solid var(--cell-border);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.2), inset 0 -2px 2px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s, transform 0.1s;
+}
+
+.cell:hover:not(.revealed) {
+    background: var(--cell-bg-hidden-hover);
+}
+
+.cell:active:not(.revealed) {
+    transform: scale(0.95);
+}
+
+.cell.revealed {
+    background: var(--cell-bg-revealed);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4);
+    cursor: default;
+}
+
+.cell.mine {
+    background: var(--danger-color);
+    box-shadow: 0 0 10px var(--danger-color);
+    animation: explode 0.5s ease-out;
+}
+
+.cell.mine.revealed-safe {
+     background: var(--text-color);
+     opacity: 0.5;
+}
+
+@keyframes explode {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); background: white; }
+    100% { transform: scale(1); }
+}
+
+.cell.flag {
+    color: var(--danger-color);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+/* Number Colors */
+.cell[data-value="1"] { color: var(--num-1); }
+.cell[data-value="2"] { color: var(--num-2); }
+.cell[data-value="3"] { color: var(--num-3); }
+.cell[data-value="4"] { color: var(--num-4); }
+.cell[data-value="5"] { color: var(--num-5); }
+.cell[data-value="6"] { color: var(--num-6); }
+.cell[data-value="7"] { color: var(--num-7); }
+.cell[data-value="8"] { color: var(--num-8); }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    text-align: center;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal.hidden .modal-content {
+    transform: scale(0.8);
+}
+
+.modal h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.modal p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.win-title {
+    color: var(--success-color);
+    text-shadow: 0 0 10px rgba(46, 213, 115, 0.5);
+}
+
+.lose-title {
+    color: var(--danger-color);
+    text-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
+}
+
+/* Custom Scrollbar for board */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
